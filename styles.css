@@ -39,3 +39,12 @@
         .key.black.active {
             background: #555;
         }
+        .container{
+            border: 2vh solid rgb(100, 32, 6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 15pc;
+            width: 45pc;
+            background:grey;
+        }
