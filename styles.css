@@ -40,11 +40,66 @@
             background: #555;
         }
         .container{
-            border: 2vh solid rgb(100, 32, 6);
+            border: 2px solid rgb(100, 32, 6);
             display: flex;
             align-items: center;
             justify-content: center;
             height: 15pc;
             width: 45pc;
             background:grey;
+            /* MUITO IMPORTANTE: Define a posição relativa para ancorar o pseudo-elemento */
+            position: relative;
+            overflow: hidden; /* Garante que o efeito fique dentro do container */
+            transition: none;
+        }
+
+        /* REMOVIDO: O estilo conflitante anterior da .container.wave */
+        .container.wave {
+            /* Deixamos esta classe vazia, ela só serve para disparar o ::before */
+        }
+        
+        /* ----------------------------------------------- */
+        /* EFEITO: PAREDES AZUIS (MOVIMENTO REAL) */
+        /* ----------------------------------------------- */
+
+        /* Pseudo-elemento principal para as paredes azuis (usado para Topo/Fundo) */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Largura total */
+            height: 100%; /* Altura total */
+            pointer-events: none;
+            z-index: 5;
+            
+            /* Usaremos o box-shadow com 4 sombras para as 4 paredes */
+            /* Início: Sombra de 200px de 'spread' (extensão) invisível e fora do container,
+               dando a sensação de que ela está se movendo de longe */
+            box-shadow: 
+                0 -200px 0 200px rgba(0, 150, 255, 0), /* Topo: Sombra grande, 200px p/ cima, transparente */
+                0 200px 0 200px rgba(0, 150, 255, 0),  /* Fundo: Sombra grande, 200px p/ baixo, transparente */
+                -200px 0 0 200px rgba(0, 150, 255, 0), /* Esquerda: Sombra grande, 200px p/ esquerda, transparente */
+                200px 0 0 200px rgba(0, 150, 255, 0);  /* Direita: Sombra grande, 200px p/ direita, transparente */
+
+            /* Transição de 0.4s para o movimento ser visível */
+            transition: box-shadow 0.4s ease-out;
+        }
+
+        /* Efeito ativado: PAREDES AZUIS VISÍVEIS e MOVIDAS */
+        .container.wave::before {
+             /* Fim: A sombra é trazida para a borda (0px de offset) e ganha espessura de 30px */
+            box-shadow: 
+                0 0 0 30px rgba(0, 150, 255, 1), /* Topo: Sombra na borda, 30px de espessura, opaca */
+                0 0 0 30px rgba(0, 150, 255, 1), /* Fundo: Sombra na borda, 30px de espessura, opaca */
+                0 0 0 30px rgba(0, 150, 255, 1), /* Esquerda: Sombra na borda, 30px de espessura, opaca */
+                0 0 0 30px rgba(0, 150, 255, 1); /* Direita: Sombra na borda, 30px de espessura, opaca */
+
+            /* Opcional: Adiciona um brilho sutil para intensificar a onda */
+            filter: drop-shadow(0 0 10px rgba(0, 150, 255, 0.8));
+        }
+
+        /* Limpar o ::after anterior, se houver */
+        .container::after {
+            content: none;
         }
