@@ -1,105 +1,260 @@
- body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        .piano {
-            display: flex;
-            border: 2px solid #333;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .key {
-            width: 60px;
-            height: 200px;
-            background: white;
-            border: 1px solid #333;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.1s;
-        }
-        .key.black {
-            width: 40px;
-            height: 120px;
-            background: black;
-            color: white;
-            margin: 0 -20px;
-            z-index: 1;
-        }
-        .key.active {
-            background: #ddd;
-        }
-        .key.black.active {
-            background: #555;
-        }
-        .container{
-            border: 2px solid rgb(100, 32, 6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 15pc;
-            width: 45pc;
-            background:grey;
-            /* MUITO IMPORTANTE: Define a posição relativa para ancorar o pseudo-elemento */
-            position: relative;
-            overflow: hidden; /* Garante que o efeito fique dentro do container */
-            transition: none;
-        }
+/* RESET E BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        /* REMOVIDO: O estilo conflitante anterior da .container.wave */
-        .container.wave {
-            /* Deixamos esta classe vazia, ela só serve para disparar o ::before */
-        }
-        
-        /* ----------------------------------------------- */
-        /* EFEITO: PAREDES AZUIS (MOVIMENTO REAL) */
-        /* ----------------------------------------------- */
+body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #1e1e1e, #333);
+    background-image: url(Partitura.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    overflow-x: hidden;
+}
 
-        /* Pseudo-elemento principal para as paredes azuis (usado para Topo/Fundo) */
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%; /* Largura total */
-            height: 100%; /* Altura total */
-            pointer-events: none;
-            z-index: 5;
-            
-            /* Usaremos o box-shadow com 4 sombras para as 4 paredes */
-            /* Início: Sombra de 200px de 'spread' (extensão) invisível e fora do container,
-               dando a sensação de que ela está se movendo de longe */
-            box-shadow: 
-                0 -200px 0 200px rgba(0, 150, 255, 0), /* Topo: Sombra grande, 200px p/ cima, transparente */
-                0 200px 0 200px rgba(0, 150, 255, 0),  /* Fundo: Sombra grande, 200px p/ baixo, transparente */
-                -200px 0 0 200px rgba(0, 150, 255, 0), /* Esquerda: Sombra grande, 200px p/ esquerda, transparente */
-                200px 0 0 200px rgba(0, 150, 255, 0);  /* Direita: Sombra grande, 200px p/ direita, transparente */
+/* DISPLAY DA NOTA */
+.note-display {
+    margin: 15px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 8px 20px;
+    border-radius: 10px;
+    z-index: 10;
+}
 
-            /* Transição de 0.4s para o movimento ser visível */
-            transition: box-shadow 0.4s ease-out;
-        }
+#current-note { color: #00ccff; margin-right: 10px; }
+#current-frequency { color: #fff; }
 
-        /* Efeito ativado: PAREDES AZUIS VISÍVEIS e MOVIDAS */
-        .container.wave::before {
-             /* Fim: A sombra é trazida para a borda (0px de offset) e ganha espessura de 30px */
-            box-shadow: 
-                0 0 0 30px rgba(0, 150, 255, 1), /* Topo: Sombra na borda, 30px de espessura, opaca */
-                0 0 0 30px rgba(0, 150, 255, 1), /* Fundo: Sombra na borda, 30px de espessura, opaca */
-                0 0 0 30px rgba(0, 150, 255, 1), /* Esquerda: Sombra na borda, 30px de espessura, opaca */
-                0 0 0 30px rgba(0, 150, 255, 1); /* Direita: Sombra na borda, 30px de espessura, opaca */
+/* PIANO */
+.piano-container {
+    width: 100%;
+    max-width: 1350px;
+    padding: 20px;
+    background: #111;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    overflow: visible;
+    position: relative;
+    z-index: 5;
+    margin: 10px 0;
+}
 
-            /* Opcional: Adiciona um brilho sutil para intensificar a onda */
-            filter: drop-shadow(0 0 10px rgba(0, 150, 255, 0.8));
-        }
+.piano {
+    position: relative;
+    width: 1296px;
+    height: 180px;
+    margin: 0 auto;
+    overflow: visible;
+}
 
-        /* Limpar o ::after anterior, se houver */
-        .container::after {
-            content: none;
-        }
+/* TECLAS BRANCAS */
+.key.white-key {
+    position: absolute;
+    width: 36px;
+    height: 180px;
+    background: linear-gradient(to bottom, #fff 0%, #f7f7f7 50%, #e0e0e0 100%);
+    border: 1px solid #777;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5), inset 0 -5px 10px rgba(0,0,0,0.1), inset 0 1px 0 #fff;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.05s ease-out;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.8em;
+    z-index: 1;
+}
+
+.key.white-key:active,
+.key.white-key.active {
+    background: linear-gradient(to bottom, #e0e0e0, #ccc);
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5), inset 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+/* TECLAS PRETAS */
+.key.black-key {
+    position: absolute;
+    width: 24px;
+    height: 110px;
+    background: linear-gradient(to bottom, #222 0%, #111 100%);
+    border: 1px solid #000;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.7), inset 0 -5px 10px rgba(255,255,255,0.1), inset 0 1px 0 #444;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.05s ease-out;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+.key.black-key:active,
+.key.black-key.active {
+    background: linear-gradient(to bottom, #111, #000);
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.7), inset 0 -2px 5px rgba(255,255,255,0.15);
+}
+
+.note-label {
+    position: absolute;
+    bottom: 5px;
+}
+
+/* BOLINHA FLUTUANTE */
+.menu-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #00ccff;
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(0, 204, 255, 0.4);
+    cursor: pointer;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 204, 255, 0.6);
+}
+
+.menu-button span {
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.menu-button span:nth-child(1) { top: 18px; }
+.menu-button span:nth-child(2) { top: 28px; }
+.menu-button span:nth-child(3) { top: 38px; }
+
+.menu-button.open span:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+.menu-button.open span:nth-child(2) { opacity: 0; }
+.menu-button.open span:nth-child(3) {
+    transform: rotate(-45deg) translate(10px, -10px);
+}
+
+/* MENU LATERAL */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100%;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.5);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
+    color: white;
+}
+
+.sidebar.open { right: 0; }
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.sidebar-header h3 { margin: 0; color: #00ccff; font-size: 1.5em; }
+
+.close-sidebar {
+    background: none; border: none; color: #aaa; font-size: 28px;
+    cursor: pointer; width: 36px; height: 36px; display: flex;
+    align-items: center; justify-content: center; border-radius: 50%;
+    transition: 0.2s;
+}
+
+.close-sidebar:hover { background: rgba(0, 204, 255, 0.2); color: #00ccff; }
+
+.sidebar-menu { list-style: none; padding: 0; margin: 0; }
+.sidebar-menu li { margin-bottom: 8px; }
+
+.sidebar-menu button {
+    width: 100%; padding: 14px 16px; background: #222; color: white;
+    border: none; border-radius: 12px; font-size: 1em; text-align: left;
+    cursor: pointer; transition: all 0.2s ease; display: flex;
+    align-items: center; gap: 12px;
+}
+
+.sidebar-menu button:hover {
+    background: #00ccff; color: #111; transform: translateX(-5px);
+}
+
+.sidebar-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5); z-index: 900; opacity: 0;
+    visibility: hidden; transition: 0.3s;
+}
+
+.sidebar-overlay.open { opacity: 1; visibility: visible; }
+
+/* MODAIS */
+.modal {
+    display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+    width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+}
+
+.modal.open { display: block; }
+
+.modal-content {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    background: #111; padding: 30px; border-radius: 20px;
+    max-width: 400px; width: 90%; box-shadow: 0 20px 50px rgba(0, 204, 255, 0.3);
+    color: white; text-align: center; opacity: 0; transition: all 0.3s ease;
+}
+
+.modal.open .modal-content {
+    transform: translate(-50%, -50%) scale(1); opacity: 1;
+}
+
+.close { position: absolute; top: 15px; right: 20px; font-size: 30px; cursor: pointer; color: #aaa; }
+.close:hover { color: #00ccff; }
+
+.modal h2 { margin: 0 0 20px; color: #00ccff; font-size: 1.8em; }
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .piano { width: 100%; transform: scale(0.8); transform-origin: top center; }
+    .piano-container { padding: 10px; }
+    .note-display { font-size: 1.2em; }
+}
