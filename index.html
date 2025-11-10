@@ -3,32 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Piano</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Simulador de Piano - 36 Teclas</title>
+    <link rel="stylesheet" href="styles1.css">
 </head>
 <body>
-    <div class="piano" id="piano">
-        <div class="key" data-note="C4">C</div>
-        <div class="key black" data-note="C#4">C#</div>
-        <div class="key" data-note="D4">D</div>
-        <div class="key black" data-note="D#4">D#</div>
-        <div class="key" data-note="E4">E</div>
-        <div class="key" data-note="F4">F</div>
-        <div class="key black" data-note="F#4">F#</div>
-        <div class="key" data-note="G4">G</div>
-        <div class="key black" data-note="G#4">G#</div>
-        <div class="key" data-note="A4">A</div>
-        <div class="key black" data-note="A#4">A#</div>
-        <div class="key" data-note="B4">B</div>
-        <div class="key" data-note="C5">C</div>
+    <!-- DISPLAY DA NOTA -->
+    <div class="note-display">
+        <span id="current-note">C1</span>
+        <span id="current-frequency">32.70 Hz</span>
     </div>
-    <script src="script.js"></script>
+
+    <!-- PIANO -->
+    <div class="piano-container">
+        <div class="piano" id="piano"></div>
+    </div>
+
+    <!-- BOLINHA FLUTUANTE -->
+    <div class="menu-button" id="menuButton">
+        <span></span><span></span><span></span>
+    </div>
+
+    <!-- MENU LATERAL -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <button class="close-sidebar" id="closeSidebar">×</button>
+        </div>
+        <ul class="sidebar-menu">
+            <li><button data-modal="modal1">Teclas</button></li>
+            <li><button data-modal="modal2">Sons</button></li>
+            <li><button data-modal="modal3">Configurações</button></li>
+            <li><button data-modal="modal4">Sobre</button></li>
+            <li><button data-modal="modal5">Apoio</button></li>
+        </ul>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- MODAIS -->
+    <div class="modal" id="modal1">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Mapeamento de Teclas</h2>
+            <p>Use as teclas do seu teclado conforme o desenho no piano!<br>
+            Teclas brancas → letras/números<br>
+            Teclas pretas → Shift + tecla (ex: ! = C#1)</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Qualidade de Som</h2>
+            <p>Som base: piano real (C4)<br>
+            Notas graves têm boost automático para soar mais cheias.<br>
+            Fade-out de 1.5s em todas as notas.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal3">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Configurações</h2>
+            <p>Volume boost nas graves: 50%<br>
+            Duração do fade: 1.5s<br>
+            Tecla base: C4 (sons/69.ogg)</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal4">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Sobre</h2>
+            <p>Piano virtual 5 oitavas (C1 a C6)<br>
+            Desenvolvido com Web Audio API<br>
+            Totalmente offline!</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal5">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Apoie o projeto</h2>
+            <p>Se curtiu, compartilhe!<br>
+            Pix: seu@email.com<br>
+            Ou só diga "obrigado"</p>
+        </div>
+    </div>
+
+    <script src="script1.js"></script>
 </body>
-
 </html>
-
-
-
-
-
-
