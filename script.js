@@ -608,7 +608,7 @@ function loadBaseSound() {
 
 
 // === CONTROLE DO SLIDER DE VELOCIDADE ===
-    const sequencePointer = document.getElementById('sequencePointer');
+   const sequencePointer = document.getElementById('sequencePointer');
     const sliderContainer = sequencePointer.querySelector('.speed-slider-container');
     const track = sliderContainer.querySelector('.speed-slider-track');
     const thumb = document.getElementById('speedSliderThumb');
@@ -685,5 +685,6 @@ function loadBaseSound() {
     document.addEventListener('click', () => {
         sequencePointer.classList.remove('open');
     });
+
 
 
