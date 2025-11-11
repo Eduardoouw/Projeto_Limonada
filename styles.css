@@ -1017,3 +1017,181 @@ button:disabled { background-color: #555 !important; opacity: 0.7; cursor: not-a
     .note-display { margin-top: 60px; }
     .chat-container h1 { font-size: 2em; }
 }
+/* RESET E BASE */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #1e1e1e, #333);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    overflow: hidden;
+    background-image: url(Partitura.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* ELEMENTOS PRINCIPAIS */
+.note-display, .music-selector, .controls-container, .sequence-reader {
+    margin: 10px 0;
+    z-index: 10;
+}
+.piano-container { width: 1350px; padding: 20px; background: #111; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+.piano { position: relative; width: 1296px; height: 180px; }
+
+/* TECLAS */
+.key.white-key, .key.black-key {
+    position: absolute;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.05s ease-out;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+.key.white-key { width: 36px; height: 180px; background: linear-gradient(#fff,#e0e0e0); border-radius: 0 0 5px 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.5); z-index: 1; }
+.key.black-key { width: 24px; height: 110px; background: linear-gradient(#222,#000); border-radius: 0 0 5px 5px; box-shadow: 0 4px 6px rgba(0,0,0,0.7); z-index: 2; top: 0; }
+.key.white-key:active, .key.black-key:active { transform: translateY(3px); }
+
+/* MENU E MODAIS */
+.menu-button, .sidebar, .modal { /* seu CSS original aqui */ }
+
+/* CHAT DE AJUDA - O MAIS LINDO DO BRASIL */
+.chat-modal .modal-content {
+    background: transparent;
+    padding: 0;
+    border-radius: 25px;
+    overflow: hidden;
+    max-width: 700px;
+    width: 95%;
+    position: relative;
+}
+
+.chat-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 40px 30px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 10;
+}
+
+.chat-container h1 {
+    color: white;
+    font-size: 2.8em;
+    margin-bottom: 20px;
+    text-shadow: 0 3px 10px rgba(0,0,0,0.4);
+}
+
+.conversation-display {
+    width: 100%;
+    height: 420px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 18px;
+    padding: 20px;
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    max-width: 80%;
+    padding: 14px 20px;
+    border-radius: 20px;
+    font-size: 1.1em;
+    line-height: 1.4;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.bot-message {
+    background: white;
+    color: #333;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+}
+
+.user-message {
+    background: #00ff88;
+    color: black;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+}
+
+.choices-area {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.choice-button, .action-button {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.choice-button:hover, .action-button:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.action-button {
+    background: rgba(255,100,100,0.9);
+    margin-top: 10px;
+}
+
+/* NUVENS ANIMADAS */
+.cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.9;
+    animation: moveClouds linear infinite;
+    z-index: 1;
+}
+
+.cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+}
+
+.cloud-1 { width: 250px; height: 80px; top: 15%; left: -300px; animation-duration: 25s; }
+.cloud-2 { width: 180px; height: 60px; top: 45%; left: -250px; animation-duration: 35s; }
+.cloud-3 { width: 300px; height: 90px; top: 70%; left: -350px; animation-duration: 30s; }
+
+@keyframes moveClouds {
+    to { transform: translateX(calc(100vw + 400px)); }
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .piano-container { width: 95%; padding: 10px; }
+    .piano { width: 1296px; }
+    .chat-container h1 { font-size: 2.2em; }
+    .conversation-display { height: 350px; }
+}
