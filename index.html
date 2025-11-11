@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Piano - 36 Teclas</title>
-    <link rel="stylesheet" href="parte4.css">
+    <title>Piano Virtual - 36 Teclas</title>
+    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <!-- USER INFO (após login) -->
+    <!-- USER INFO -->
     <div class="user-info" id="userInfo" style="display: none;">
         <span id="userEmailDisplay"></span>
         <button id="logoutBtn">Sair</button>
@@ -44,14 +44,14 @@
 
     <div class="sequence-reader" id="sequenceReader">
         <div class="sequence-track" id="sequenceTrack"></div>
-        <div class="sequence-pointer" id="sequencePointer">▶</div>
+        <div class="sequence-pointer" id="sequencePointer">Play</div>
     </div>
 
     <div class="controls-container">
-        <button id="recordButton">⏺️ Gravar</button>
-        <button id="downloadButton" disabled>💾 Baixar</button>
-        <button id="playButton" disabled>▶️ Tocar</button>
-        <button id="playMusicButton">🎶 Tocar Música</button> 
+        <button id="recordButton">Record Gravar</button>
+        <button id="downloadButton" disabled>Download Baixar</button>
+        <button id="playButton" disabled>Play Tocar</button>
+        <button id="playMusicButton">Music Tocar Música</button> 
     </div>
 
     <div class="piano-container">
@@ -91,10 +91,44 @@
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- MODAIS -->
-    <div class="modal" id="modal1"> <!-- Teclas --> ... </div>
-    <div class="modal" id="modal2"> <!-- Qualidade --> ... </div>
-    <div class="modal" id="modal3"> <!-- Config --> ... </div>
-    <div class="modal" id="modal5"> <!-- Ajuda --> ... </div>
+    <div class="modal" id="modal1">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Keyboard Teclas</h2>
+            <p>Toque no piano!<br>
+            Teclas brancas → letras/números<br>
+            Teclas pretas → Shift + tecla (ex: ! = C#1)</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal2">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Sound Qualidade de Som</h2>
+            <p>Som base: piano real (C4)<br>
+            Notas graves têm boost automático para soar mais cheias.<br>
+            Fade-out de 1.5s em todas as notas.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal3">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Settings Configurações</h2>
+            <p>Volume boost nas graves: 50%<br>
+            Duração do fade: 1.5s<br>
+            Tecla base: C4 (sons/69.ogg)</p>
+        </div>
+    </div>
+
+    <div class="modal" id="modal5">
+        <div class="modal-content">
+            <span class="close">×</span>
+            <h2>Help Ajuda</h2>
+            <p>Grave suas próprias melodias com o botão "Gravar".<br>
+            Ou toque uma música pronta usando o seletor!</p>
+        </div>
+    </div>
 
     <!-- SOBRE O SITE -->
     <div class="modal" id="modalSobreSite">
@@ -109,7 +143,7 @@
                 <li>Músicas pré-carregadas</li>
                 <li>Efeitos visuais e sonoros realistas</li>
             </ul>
-            <p>Desenvolvido em 2025 com ❤️ por uma equipe apaixonada por música e tecnologia.</p>
+            <p>Desenvolvido em 2025 com amor por uma equipe apaixonada por música e tecnologia.</p>
         </div>
     </div>
 
@@ -141,6 +175,6 @@
         </div>
     </div>
 
-    <script src="parte4.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
