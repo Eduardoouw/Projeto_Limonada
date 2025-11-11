@@ -10,7 +10,7 @@ const USERS = [
     { email: "ana@gmail.com", password: "1234", name: "Ana Silva" },
     { email: "lucas@gmail.com", password: "dev2025", name: "Lucas Mendes" },
     { email: "bea@gmail.com", password: "musica123", name: "Beatriz Costa" },
-    { email: "rita@gmail.com, password: "12345", Name: "Rita Steyer" }
+    { email: "rita@gmail.com", password: "12345", Name: "Rita Steyer" }
 ];
 
 // === MÚSICAS PRÉ-CARREGADAS ===
@@ -597,4 +597,5 @@ function loadBaseSound() {
             alert("Erro crítico: não foi possível carregar o som do piano.");
         });
 }
+
 
