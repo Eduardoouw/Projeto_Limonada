@@ -150,6 +150,7 @@ function playNote(note) {
 }
 
 // === RENDERIZAÇÃO DO PIANO ===
+// === RENDERIZAÇÃO DO PIANO ===
 function renderPiano() {
     const piano = document.getElementById('piano');
     const notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -184,7 +185,7 @@ function renderPiano() {
         }
     }
 
-document.querySelectorAll('.key').forEach(key => {
+    document.querySelectorAll('.key').forEach(key => {
         const note = key.dataset.note;
         key.addEventListener('mousedown', () => {
             key.classList.add('active');
@@ -194,7 +195,7 @@ document.querySelectorAll('.key').forEach(key => {
 
             if (!isRecording && !isPlayingMusic) {
                 const keyLabel = noteToKey[note];
-                const isBlack = note.includes('#');
+                const isBlack = note.includes('#');     
                 currentSequence.push({ notes: note, display: keyLabel, isChord: false, isBlack: isBlack });
                 updateVisualSequence();
             }
@@ -598,6 +599,7 @@ function loadBaseSound() {
             alert("Erro crítico: não foi possível carregar o som do piano.");
         });
 }
+
 
 
 
