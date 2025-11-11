@@ -184,12 +184,9 @@ function renderPiano() {
         }
     }
 
-   document.querySelectorAll('.key').forEach(key => {
+  document.querySelectorAll('.key').forEach(key => {
     const note = key.dataset.note;
-
-    // Função unificada para INICIAR a nota
-    function startNote(e) {
-        e.preventDefault(); // Previne rolagem ou zoom indesejado ao tocar
+    key.addEventListener('mousedown', () => {
         key.classList.add('active');
         playNote(note);
         updateDisplay(note);
@@ -201,12 +198,10 @@ function renderPiano() {
             currentSequence.push({ notes: note, display: keyLabel, isChord: false, isBlack: isBlack });
             updateVisualSequence();
         }
-    }
-
-    // Função unificada para PARAR a nota
-    function endNote() {
-        key.classList.remove('active');
-    }
+    });
+    key.addEventListener('mouseup', () => key.classList.remove('active'));
+    key.addEventListener('mouseleave', () => key.classList.remove('active'));
+});
 
     // Adiciona eventos de Mouse (para desktop) E Toque (para celular)
     key.addEventListener('mousedown', startNote);
