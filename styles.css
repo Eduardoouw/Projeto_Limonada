@@ -397,7 +397,7 @@ button:disabled { background-color: #555 !important; cursor: not-allowed; opacit
 }
 
 /* --- CONTROLE DE VELOCIDADE (SEQUENCE POINTER) --- */
-.sequence-pointer {
+.sequence-pointer #pointerText{
     position: absolute;
     left: 25px;
     top: 50%;
@@ -432,7 +432,7 @@ button:disabled { background-color: #555 !important; cursor: not-allowed; opacit
     transition: opacity 0.2s;
 }
 
-.sequence-pointer.open  {
+.sequence-pointer.open #pointerText {
     opacity: 0;
     display: none; /* Esconde o texto "Play" */
 }
@@ -492,3 +492,4 @@ button:disabled { background-color: #555 !important; cursor: not-allowed; opacit
 .speed-slider-thumb:active {
     cursor: grabbing;
 }
+
