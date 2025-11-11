@@ -10,7 +10,7 @@
 <body>
 
     <!-- LOGIN MODAL -->
-    <div class="modal" id="loginModal">
+    <div class="modal open" id="loginModal">
         <div class="modal-content">
             <span class="close">×</span>
             <h2>Login</h2>
@@ -25,7 +25,7 @@
 
     <!-- USER INFO -->
     <div class="user-info" id="userInfo" style="display: none;">
-        <span id="userEmailDisplay"></span>
+        <span id="userEmailDisplay">Usuário</span>
         <button id="logoutBtn">Sair</button>
     </div>
 
@@ -42,17 +42,18 @@
         <button id="clearSequence">Limpar</button>
     </div>
 
-   
     <div class="sequence-reader" id="sequenceReader">
         <div class="sequence-track" id="sequenceTrack"></div>
-        <div class="sequence-pointer" id="sequencePointer">Play</div><div class="speed-slider-container">
-        <span id="speedValueDisplay">1.0x</span>
-        <div class="speed-slider-track">
-            <div class="speed-slider-thumb" id="speedSliderThumb"></div>
+        
+        <div class="sequence-pointer" id="sequencePointer">
+            <span id="speedValueDisplay">1.0x</span>
+            <div class="speed-slider-container">
+                <div id="speedValueDisplaySlider">1.0x</div>
+                <div class="speed-slider-track">
+                    <div class="speed-slider-thumb" id="speedSliderThumb"></div>
+                </div>
+            </div>
         </div>
-    </div>
-    </div>
-
     </div>
 
     <div class="controls-container">
@@ -76,11 +77,11 @@
         <div class="sidebar-header">
             <h3>Menu</h3>
             <button class="close-sidebar" id="closeSidebar">×</button>
-        </div>
+        </partial>
         <ul class="sidebar-menu">
             <li><button data-modal="modal1">Teclas</button></li>
             <li><button data-modal="modal2">Qualidade de Som</button></li>
-            <li><button data-modal="modal3">Configurações</button></li>
+            <li><button data-modal="modal3">Configurações</button小康</li>
             <li><button data-modal="modalSobreSite">Sobre o Site</button></li>
             <li><button data-modal="modalSobreDev">Sobre os Devs</button></li>
             <li><button data-modal="modal5">Ajuda</button></li>
@@ -102,39 +103,66 @@
     <div class="modal" id="modal1">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Keyboard Teclas</h2>
-            <p>Toque no piano!<br>
-            Teclas brancas → letras/números<br>
-            Teclas pretas → Shift + tecla (ex: ! = C#1)</p>
+            <h2>Teclas do Teclado</h2>
+            <ul style="text-align:left; line-height:1.8;">
+                <li><strong>Teclas brancas:</strong> Use letras e números do teclado (1 a m)</li>
+                <li><strong>Teclas pretas:</strong> Segure Shift + tecla correspondente</li>
+                <li>Exemplos: ! → C#1 | @ → D#1 | ( → C#2 | Q → D#2</li>
+                <li><strong>Mouse/Touch:</strong> Clique ou toque diretamente nas teclas do piano</li>
+                <li>Display superior mostra a nota e frequência em tempo real</li>
+            </ul>
         </div>
     </div>
 
     <div class="modal" id="modal2">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Sound Qualidade de Som</h2>
-            <p>Som base: piano real (C4)<br>
-            Notas graves têm boost automático para soar mais cheias.<br>
-            Fade-out de 1.5s em todas as notas.</p>
+            <h2>Qualidade de Som</h2>
+            <p>Som real de piano acústico (amostra profissional C4)</p>
+            <p>Boost automático +50% nas notas graves</p>
+            <p>Fade-out natural de 1.5 segundos</p>
+            <br>
+            <label for="volumeSlider"><strong>Volume Geral:</strong></label><br><br>
+            <input type="range" id="volumeSlider" min="0" max="2" step="0.05" value="1">
+            <span id="volumeDisplay">100%</span>
         </div>
     </div>
 
     <div class="modal" id="modal3">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Settings Configurações</h2>
-            <p>Volume boost nas graves: 50%<br>
-            Duração do fade: 1.5s<br>
-            Tecla base: C4 (sons/69.ogg)</p>
+            <h2>Configurações</h2>
+            <div class="config-item">
+                <label>Cor das teclas brancas:</label>
+                <input type="color" id="whiteKeyColor" value="#ffffff">
+            </div>
+            <div class="config-item">
+                <label>Opacidade das teclas:</label>
+                <input type="range" id="keyOpacity" min="0.3" max="1" step="0.05" value="1">
+                <span id="opacityDisplay">100%</span>
+            </div>
+            <div class="config-item">
+                <label>Nome da conta:</label>
+                <input type="text" id="userNameChange" placeholder="Novo nome">
+                <button id="changeNameBtn">Aplicar</button>
+            </div>
+            <div class="config-item">
+                <label>
+                    <input type="checkbox" id="rgbMode">
+                    Modo RGB (fundo animado)
+                </label>
+            </div>
         </div>
     </div>
 
     <div class="modal" id="modal5">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Help Ajuda</h2>
-            <p>Grave suas próprias melodias com o botão "Gravar".<br>
-            Ou toque uma música pronta usando o seletor!</p>
+            <h2>Ajuda</h2>
+            <p>• Clique em "Gravar" → toque → clique novamente para parar</p>
+            <p>• Use "Tocar" para reproduzir sua gravação</p>
+            <p>• Selecione uma música pronta no menu superior</p>
+            <p>• Ajuste a velocidade arrastando o controle na barra de reprodução</p>
         </div>
     </div>
 
@@ -143,15 +171,16 @@
         <div class="modal-content">
             <span class="close">×</span>
             <h2>Sobre o Site</h2>
-            <p><strong>Piano Virtual 5 Oitavas</strong> é um simulador de piano totalmente offline, desenvolvido com tecnologias web modernas.</p>
-            <ul>
-                <li>36 teclas brancas (C1 a C6)</li>
-                <li>Teclas pretas com mapeamento visual</li>
-                <li>Gravação e reprodução de melodias</li>
-                <li>Músicas pré-carregadas</li>
-                <li>Efeitos visuais e sonoros realistas</li>
+            <p><strong>Piano Virtual 5 Oitavas</strong> é um simulador completo e 100% offline de piano com som realista.</p>
+            <p>Desenvolvido em 2025 com HTML, CSS e JavaScript puro (sem bibliotecas pesadas), funciona perfeitamente no celular e PC.</p>
+            <ul style="text-align:left;">
+                <li>36 teclas brancas + todas as pretas</li>
+                <li>Gravação e reprodução ilimitada</li>
+                <li>10 músicas famosas inclusas</li>
+                <li>Controle total de volume, cores, opacidade e modo RGB</li>
+                <li>Totalmente responsivo e otimizado</li>
             </ul>
-            <p>Desenvolvido em 2025 com amor por uma equipe apaixonada por música e tecnologia.</p>
+            <p>Feito com muito amor por quem ama música e programação.</p>
         </div>
     </div>
 
@@ -165,19 +194,19 @@
                     <img src="dev1.jpg" alt="Ana Silva">
                     <h3>Ana Silva</h3>
                     <p>Frontend & Design</p>
-                    <p><i class="fab fa-github"></i> @anasilva</p>
+                    <p>@anasilva</p>
                 </div>
                 <div class="dev-card">
                     <img src="dev2.jpg" alt="Lucas Mendes">
                     <h3>Lucas Mendes</h3>
                     <p>Web Audio & JS</p>
-                    <p><i class="fab fa-linkedin"></i> lucasmendes</p>
+                    <p>lucasmendes</p>
                 </div>
                 <div class="dev-card">
                     <img src="dev3.jpg" alt="Beatriz Costa">
                     <h3>Beatriz Costa</h3>
                     <p>UX & Músicas</p>
-                    <p><i class="fab fa-instagram"></i> @beacosta</p>
+                    <p>@beacosta</p>
                 </div>
             </div>
         </div>
@@ -186,11 +215,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
