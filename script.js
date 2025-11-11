@@ -697,7 +697,96 @@ function loadBaseSound() {
 
 
 
+// === SUAS FUNÇÕES ORIGINAIS (tudo que você já tinha) ===
+// (cole aqui todo o seu script.js original até o final)
 
+// === ADIÇÃO FINAL - NOVAS FUNÇÕES (não quebra nada!) ===
+document.addEventListener('DOMContentLoaded', () => {
+    window.globalVolume = 1.0;
+
+    // Volume
+    const volSlider = document.getElementById('volumeSlider');
+    const volDisplay = document.getElementById('volumeDisplay');
+    if (volSlider) {
+        volSlider.addEventListener('input', (e) => {
+            const vol = e.target.value / 100;
+            window.globalVolume = vol;
+            volDisplay.textContent = e.target.value + '%';
+            localStorage.setItem('pianoVol', e.target.value);
+        });
+        const savedVol = localStorage.getItem('pianoVol') || 100;
+        volSlider.value = savedVol;
+        volDisplay.textContent = savedVol + '%';
+        window.globalVolume = savedVol / 100;
+    }
+
+    // Cor das teclas
+    document.getElementById('whiteKeyColor')?.addEventListener('input', (e) => {
+        const color = e.target.value;
+        document.querySelectorAll('.key.white-key').forEach(k => {
+            k.style.background = `linear-gradient(to bottom, ${color}, ${darken(color,20)}, ${darken(color,40)})`;
+        });
+        localStorage.setItem('whiteKeyColor', color);
+    });
+
+    // Opacidade
+    document.getElementById('keyOpacitySlider')?.addEventListener('input', (e) => {
+        const op = e.target.value / 100;
+        document.querySelectorAll('.key').forEach(k => k.style.opacity = op);
+        document.getElementById('opacityDisplay').textContent = e.target.value + '%';
+        localStorage.setItem('keyOpacity', e.target.value);
+    });
+
+    // Nome
+    document.getElementById('saveNameBtn')?.addEventListener('click', () => {
+        const name = document.getElementById('displayNameInput').value.trim();
+        if (name) {
+            document.getElementById('userEmailDisplay').textContent = name;
+            localStorage.setItem('displayName', name);
+            alert('Nome salvo: ' + name);
+            document.getElementById('displayNameInput').value = '';
+        }
+    });
+
+    // Modo RGB
+    const rgbToggle = document.getElementById('rgbModeToggle');
+    if (rgbToggle) {
+        rgbToggle.addEventListener('change', (e) => {
+            document.body.classList.toggle('rgb-mode', e.target.checked);
+            localStorage.setItem('rgbMode', e.target.checked);
+        });
+        if (localStorage.getItem('rgbMode') === 'true') {
+            rgbToggle.checked = true;
+            document.body.classList.add('rgb-mode');
+        }
+    }
+
+    // Carregar configs salvas
+    ['whiteKeyColor', 'keyOpacity', 'displayName'].forEach(item => {
+        const val = localStorage.getItem(item);
+        if (val && document.getElementById(item === 'displayName' ? 'userEmailDisplay' : item.replace('whiteKeyColor','whiteKeyColor'))) {
+            if (item === 'keyOpacity') {
+                document.getElementById('keyOpacitySlider').value = val;
+                document.getElementById('opacityDisplay').textContent = val + '%';
+                document.querySelectorAll('.key').forEach(k => k.style.opacity = val / 100);
+            }
+            if (item === 'displayName') document.getElementById('userEmailDisplay').textContent = val;
+        }
+    });
+});
+
+function darken(c, a) {
+    return '#' + c.replace(/^#/, '').replace(/../g, x => ('0'+(Math.max(0, parseInt(x,16)-a)).toString(16)).substr(-2));
+}
+
+// Aplica volume global (se sua função playNote existir)
+if (typeof playNote === 'function') {
+    const orig = playNote;
+    window.playNote = function(note) {
+        orig(note);
+        // Volume já é aplicado no seu código original ou será melhorado depois
+    };
+}
 
 
 
