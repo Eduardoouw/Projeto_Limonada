@@ -795,6 +795,92 @@ if (typeof playNote === 'function') {
 
 
 
+// === CHAT DE AJUDA - FUNCIONANDO PERFEITAMENTE ===
+document.addEventListener('DOMContentLoaded', () => {
+    const conversationDisplay = document.getElementById('conversation-display');
+    const choicesArea = document.getElementById('choices-area');
+    const restartButton = document.getElementById('restart-button');
+
+    const conversationNodes = {
+        start: {
+            message: "Olá! Como posso te ajudar com o Piano Virtual hoje?",
+            choices: [
+                { text: "Como tocar com o teclado?", next: "teclado" },
+                { text: "Como gravar uma música?", next: "gravar" },
+                { text: "O som não está saindo", next: "sem_som" },
+                { text: "Como mudar as cores?", next: "cores" },
+                { text: "Quero falar com humano", next: "humano" }
+            ]
+        },
+        teclado: {
+            message: "Use as teclas do seu teclado físico!\n\n• a s d f g h j → C4 a B4\n• z x c v b n m → C3 a B3\n• q w e r t y u → C5 a B5\n\nTeclas pretas: segure Shift + letra",
+            choices: [{ text: "Entendi, valeu!", next: "start" }]
+        },
+        gravar: {
+            message: "Clique em 'Record Gravar' → toque sua música → clique novamente para parar.\n\nDepois use 'Play Tocar' ou 'Download Baixar' para ouvir/salvar!",
+            choices: [{ text: "Show! Obrigado", next: "start" }]
+        },
+        sem_som: {
+            message: "Clique em qualquer tecla do piano primeiro!\n\nO navegador só libera som após uma interação (regra de segurança).\n\nDepois disso tudo funciona normalmente!",
+            choices: [{ text: "Agora deu certo!", next: "start" }]
+        },
+        cores: {
+            message: "Abra o menu (≡) → Configurações → use o seletor de cor das teclas brancas.\n\nTem também modo RGB no fundo!",
+            choices: [{ text: "Perfeito!", next: "start" }]
+        },
+        humano: {
+            message: "Hehe sou só um robô muito bem feito\n\nMas pode mandar mensagem pra gente no:\ncontato@pianovirtual.com\n\nA gente responde rapidinho!",
+            choices: [{ text: "Haha tudo bem!", next: "start" }]
+        }
+    };
+
+    let currentNode = 'start';
+
+    function addMessage(text, type) {
+        const div = document.createElement('div');
+        div.className = `message ${type}-message`;
+        div.innerHTML = text.replace(/\n/g, '<br>');
+        conversationDisplay.appendChild(div);
+        conversationDisplay.scrollTop = conversationDisplay.scrollHeight;
+    }
+
+    function showChoices(node) {
+        choicesArea.innerHTML = '';
+        node.choices.forEach(choice => {
+            const btn = document.createElement('button');
+            btn.className = 'choice-button';
+            btn.textContent = choice.text;
+            btn.onclick = () => {
+                addMessage(choice.text, 'user');
+                currentNode = choice.next;
+                addMessage(conversationNodes[currentNode].message, 'bot');
+                showChoices(conversationNodes[currentNode]);
+            };
+            choicesArea.appendChild(btn);
+        });
+    }
+
+    // Inicia o chat quando abre o modal
+    const ajudaModal = document.getElementById('modal5');
+    const observer = new MutationObserver(() => {
+        if (ajudaModal.classList.contains('open') || ajudaModal.style.display === 'block') {
+            setTimeout(() => {
+                conversationDisplay.innerHTML = '<div class="message bot-message">Olá! Como posso te ajudar hoje? <span style="font-size:0.8em">♫</span></div>';
+                showChoices(conversationNodes.start);
+            }, 300);
+        }
+    });
+    observer.observe(ajudaModal, { attributes: true });
+
+    // Botão de reiniciar
+    restartButton.onclick = () => {
+        conversationDisplay.innerHTML = '<div class="message bot-message">Olá! Como posso te ajudar hoje? <span style="font-size:0.8em">♫</span></div>';
+        showChoices(conversationNodes.start);
+    };
+});
+
+// Seu outro código do piano continua aqui embaixo normalmente...
+// (todas as funções de áudio, gravação, etc)
 
 
 
