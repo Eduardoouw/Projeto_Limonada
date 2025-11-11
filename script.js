@@ -184,35 +184,25 @@ function renderPiano() {
         }
     }
 
- // ... dentro de renderPiano() ...
 document.querySelectorAll('.key').forEach(key => {
-    const note = key.dataset.note;
-    key.addEventListener('mousedown', () => {
-        key.classList.add('active');
-        playNote(note);
-        updateDisplay(note);
-        createSpark(key);
+        const note = key.dataset.note;
+        key.addEventListener('mousedown', () => {
+            key.classList.add('active');
+            playNote(note);
+            updateDisplay(note);
+            createSpark(key);
 
-        if (!isRecording && !isPlayingMusic) {
-            const keyLabel = noteToKey[note];
-            const isBlack = note.includes('#');
-            currentSequence.push({ notes: note, display: keyLabel, isChord: false, isBlack: isBlack });
-            updateVisualSequence();
-        }
+            if (!isRecording && !isPlayingMusic) {
+                const keyLabel = noteToKey[note];
+                const isBlack = note.includes('#');
+                currentSequence.push({ notes: note, display: keyLabel, isChord: false, isBlack: isBlack });
+                updateVisualSequence();
+            }
+        });
+        key.addEventListener('mouseup', () => key.classList.remove('active'));
+        key.addEventListener('mouseleave', () => key.classList.remove('active'));
     });
-    key.addEventListener('mouseup', () => key.classList.remove('active'));
-    key.addEventListener('mouseleave', () => key.classList.remove('active'));
-});
-
-    // Adiciona eventos de Mouse (para desktop) E Toque (para celular)
-    key.addEventListener('mousedown', startNote);
-    key.addEventListener('touchstart', startNote, { passive: false });
-
-    key.addEventListener('mouseup', endNote);
-    key.addEventListener('mouseleave', endNote);
-    key.addEventListener('touchend', endNote);
-    key.addEventListener('touchcancel', endNote);
-});
+}
 
 // === EVENTOS DO TECLADO ===
 document.addEventListener('keydown', e => {
@@ -608,6 +598,7 @@ function loadBaseSound() {
             alert("Erro crítico: não foi possível carregar o som do piano.");
         });
 }
+
 
 
 
