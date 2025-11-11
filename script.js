@@ -62,6 +62,8 @@ let recording = [];
 let recordingStartTime = 0;
 let currentSequence = [];
 let isPlayingMusic = false;
+let playbackSpeed = 1.0; // <--- ADICIONE ESTA LINHA
+
 
 // === INICIALIZAÇÃO DO ÁUDIO ===
 document.addEventListener('click', () => {
@@ -425,7 +427,9 @@ function playSequenceFromList(seq) {
     scrollToCurrentNote(-1);
 
     let time = 0;
-    const noteDuration = 200;
+    // MODIFICADO: Usa a velocidade
+    const baseNoteDuration = 200;
+    const noteDuration = baseNoteDuration / playbackSpeed; 
     const playPromises = [];
 
     seq.forEach((item, index) => {
@@ -602,12 +606,81 @@ function loadBaseSound() {
 }
 
 
+// === CONTROLE DO SLIDER DE VELOCIDADE ===
+    const sequencePointer = document.getElementById('sequencePointer');
+    const sliderContainer = sequencePointer.querySelector('.speed-slider-container');
+    const track = sliderContainer.querySelector('.speed-slider-track');
+    const thumb = document.getElementById('speedSliderThumb');
+    const speedDisplay = document.getElementById('speedValueDisplay');
+    let isDragging = false;
 
+    // Função para atualizar a velocidade baseada na posição Y do mouse
+    const updateSpeed = (mouseY) => {
+        const trackRect = track.getBoundingClientRect();
+        const trackHeight = trackRect.height; // 100px
+        
+        // Calcula a posição Y relativa ao fundo do trilho
+        let relativeY = trackRect.bottom - mouseY;
+        
+        // Limita a posição entre 0 e a altura do trilho
+        relativeY = Math.max(0, Math.min(trackHeight, relativeY));
+        
+        const percentage = relativeY / trackHeight; // 0.0 a 1.0
+        
+        // Mapeia a porcentagem para a velocidade (0.5x a 2.0x)
+        playbackSpeed = (percentage * 1.5) + 0.5;
+        
+        // Atualiza a UI
+        thumb.style.bottom = `calc(${percentage * 100}% - 11px)`; // Centraliza o polegar (11px = metade de 22px)
+        speedDisplay.textContent = `${playbackSpeed.toFixed(1)}x`;
+    };
 
+    // Função que é chamada ao arrastar
+    const onDrag = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        // Usa clientY para mouse ou o primeiro toque para mobile
+        const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+        updateSpeed(clientY);
+    };
 
+    // Função para parar o arrasto
+    const stopDrag = () => {
+        isDragging = false;
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('mouseup', stopDrag);
+        document.removeEventListener('touchmove', onDrag);
+        document.removeEventListener('touchend', stopDrag);
+    };
 
+    // Evento de "segurar" o polegar (mouse ou toque)
+    thumb.addEventListener('mousedown', (e) => {
+        e.stopPropagation(); // Impede que o slider feche
+        isDragging = true;
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('mouseup', stopDrag);
+    });
+    thumb.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+        isDragging = true;
+        document.addEventListener('touchmove', onDrag);
+        document.addEventListener('touchend', stopDrag);
+    });
 
+    // Permite clicar diretamente no trilho para definir a velocidade
+    track.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updateSpeed(e.clientY);
+    });
 
+    // Abrir/Fechar o slider
+    sequencePointer.addEventListener('click', (e) => {
+        e.stopPropagation(); // Impede que o clique no documento feche imediatamente
+        if (isDragging) return; // Não fecha se estiver arrastando
+        sequencePointer.classList.toggle('open');
+    });
 
-
-
+    // Fecha o slider se clicar em qualquer outro lugar da página
+    document.addEventListener('click', () => {
+        sequencePointer.classList.remove('open');
+    });
