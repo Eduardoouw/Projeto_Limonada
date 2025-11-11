@@ -8,6 +8,7 @@ let baseNoteFrequency = 0;
 // === USUÁRIOS (LOGIN SIMULADO) ===
 const USERS = [
     { email: "ana@gmail.com", password: "1234", name: "Ana Silva" },
+    { email: "XD@gmail.com", password: "XDXDXD", name: "XD" },
     { email: "lucas@gmail.com", password: "dev2025", name: "Lucas Mendes" },
     { email: "bea@gmail.com", password: "musica123", name: "Beatriz Costa" },
     { email: "rita@gmail.com", password: "12345", Name: "Rita Steyer" }
@@ -597,6 +598,7 @@ function loadBaseSound() {
             alert("Erro crítico: não foi possível carregar o som do piano.");
         });
 }
+
 
 
 
