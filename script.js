@@ -17,7 +17,7 @@ const USERS = [
 const MUSICAS = [
     { nome: "Música 1 - MINECRAFT", seq: "[IP] - O [QY] - [QEI] -- [IP] - O [QY] - T [IP] - O [QY] - [EI] -- [IP] - O [QY] I T E [IP] - T [QY] - [EI] - [TO] [IP] - O [QYP] E [TS] [IP] - [OS] [QD] - [EOS] P O [IP] - O [QYP] - I [T] -- [QY] - [EI] -- [TO] - P [QI] TO" },
     { nome: "Música 2 - FUR ELISE BY PIANOBLOX", seq: "f - D - f - D - f - a - d - s - [6ep] - 0 - e - t - u - p - [3a] - 0 - W - u - O - a - [6s] - 0 - e - u - f - D - f - D - f - a - d - s - [6ep] - 0 - e - t - u - p - [3a] - 0 - W - u - s - a - [6p] - 0 - e - a - s - d - [8f] - w - t - o - g - f - [5d] - w - r - i - f - d - [6s] - 0 - e - u - d - s - [3a] - 0 - u - u - f - u - f - f - x - D - f - D - f - D - f - D - f - D - f - D - f - D - f - a - d - s - [6p] - 0 - e - t - u - p - [3a] - 0 - W - u - O - a - [6s] - 0 - e - u - f - D - f - D - f - a - d - s - [6p] - 0 - e - t - u - p - [3a] - 0 - W - u - s - a - [6p] - 0 - e - a - s - d - [8f] - w - t - o - g - f - [5d] - w - r - i - f - d - [6s] - 0 - e - u - d - s - [3a] - 0 - u - s - a - [pe6]" },
-    { nome: "Música 3 - pe6...", seq: "" }
+    { nome: "Música 3 - MINECRAFT 2", seq: "6 0 e r T r e 0 9 Q T u T e 6 0 e r T r e 0 9 Q T u T e O 0 e r T r [pe] 0 I Q T u T e u I O 0 e r T r [ea] S [QI] T u T e S f [h5][GQ] [ed] [9p] [7a] 5 7 9 Q e [h5] G [ed] [9p] [7a] 5 7 9 Q e p [6u] 0 e r T r e 0 6 0 e r T u p S | [7yd] S p [uf] [IG] [9yd] Q e T p S [5d] 7 S d e G S | r e [3r] % 7 0 W 0 7 % 3 % 7 0 W 0 6 5 7 9 Q e Q 9 7 6 ( 0 e T r e 0 3 % 7 0 W 3 % 7 0 W d d D d s d o s P o P s s s d s P s d P o o P o P o [od] d D d [so] P d s d o o P p p p d d [^P] p d c ^ [g@] d s P s d P [sp] i o i u i d d s d o i i g d s P s d P s i o i u i d d S d J j g o p P P p P d [spi] s P s p [iP] P p P i o o p P P p P d s s s P s P p s P i p s j l z c b d d D d s d o s P o P s s s d s P s d P o o P o P o d d D d s P d s d o o P p p p d d P y i p y i p d i P d g [^PJ] J J J J J J J J J J J J J j j k l z x c v b n l z x c v b n l J J J J J J J J J J J J J J J " }
 ];
 
 // === MAPEAMENTO VISUAL (rótulos nas teclas) ===
@@ -597,6 +597,7 @@ function loadBaseSound() {
             alert("Erro crítico: não foi possível carregar o som do piano.");
         });
 }
+
 
 
 
