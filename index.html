@@ -10,7 +10,7 @@
 <body>
 
     <!-- LOGIN MODAL -->
-    <div class="modal" id="loginModal">
+    <div class="modal open" id="loginModal">
         <div class="modal-content">
             <span class="close">×</span>
             <h2>Login</h2>
@@ -42,17 +42,18 @@
         <button id="clearSequence">Limpar</button>
     </div>
 
-   <div class="sequence-reader" id="sequenceReader">
+    <div class="sequence-reader" id="sequenceReader">
         <div class="sequence-track" id="sequenceTrack"></div>
         
         <div class="sequence-pointer" id="sequencePointer">
-                <span id="speedValueDisplay">1.0x</span>
+            <span id="speedValueDisplay">1.0x</span>
+            <div class="speed-slider-container">
+                <div id="speedValueDisplaySlider">1.0x</div>
                 <div class="speed-slider-track">
                     <div class="speed-slider-thumb" id="speedSliderThumb"></div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="controls-container">
@@ -102,60 +103,90 @@
     <div class="modal" id="modal1">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Keyboard Teclas</h2>
-            <p>Toque no piano!<br>
-            Teclas brancas → letras/números<br>
-            Teclas pretas → Shift + tecla (ex: ! = C#1)</p>
+            <h2>Teclas do Teclado</h2>
+            <div style="text-align:left; line-height:2; font-size:1.05em;">
+                <strong>Teclas brancas:</strong><br>
+                • a s d f g h j → C4 a B4<br>
+                • z x c v b n m → C3 a B3<br>
+                • q w e r t y u i o p → C5 a B5<br><br>
+                <strong>Teclas pretas:</strong><br>
+                • Segure Shift + tecla<br>
+                • Ex: ! = C#4 | @ = D#4 | 2 = C#5<br><br>
+                <strong>Mouse ou toque:</strong> Clique direto nas teclas
+            </div>
         </div>
     </div>
 
     <div class="modal" id="modal2">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Sound Qualidade de Som</h2>
-            <p>Som base: piano real (C4)<br>
-            Notas graves têm boost automático para soar mais cheias.<br>
-            Fade-out de 1.5s em todas as notas.</p>
+            <h2>Qualidade de Som</h2>
+            <p>Som real de piano acústico (C4 profissional)</p>
+            <p>Notas graves com boost automático (+50%)</p>
+            <p>Fade-out suave de 1.5 segundos</p>
+            <br>
+            <label style="font-weight:bold">Volume Geral:</label><br><br>
+            <input type="range" id="volumeSlider" min="0" max="150" value="100" style="width:100%">
+            <div style="text-align:center; margin-top:10px; font-size:1.4em; color:#00ccff">
+                <span id="volumeDisplay">100%</span>
+            </div>
         </div>
     </div>
 
     <div class="modal" id="modal3">
         <div class="modal-content">
             <span class="close">×</span>
-            <h2>Settings Configurações</h2>
-            <p>Volume boost nas graves: 50%<br>
-            Duração do fade: 1.5s<br>
-            Tecla base: C4 (sons/69.ogg)</p>
+            <h2>Configurações</h2>
+            <div style="text-align:left; line-height:2.3">
+                <div style="margin:18px 0">
+                    <label>Cor das teclas brancas:</label><br>
+                    <input type="color" id="whiteKeyColor" value="#ffffff">
+                </div>
+                <div style="margin:18px 0">
+                    <label>Opacidade das teclas:</label><br>
+                    <input type="range" id="keyOpacitySlider" min="40" max="100" value="100">
+                    <span id="opacityDisplay">100%</span>
+                </div>
+                <div style="margin:18px 0">
+                    <label>Nome exibido (após login):</label><br>
+                    <input type="text" id="displayNameInput" placeholder="Seu nome aqui" style="padding:10px; width:100%; background:#222; border:none; border-radius:8px; color:white">
+                    <button id="saveNameBtn" style="margin-top:10px; padding:10px; background:#00ccff; color:black; border:none; border-radius:8px; font-weight:bold">Salvar Nome</button>
+                </div>
+                <div style="margin:18px 0">
+                    <label style="font-size:1.1em">
+                        <input type="checkbox" id="rgbModeToggle"> Ativar Modo RGB (fundo animado)
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="modal" id="modal5">
-        <div class="modal-content">
+  <div class="modal-content">
             <span class="close">×</span>
-            <h2>Help Ajuda</h2>
+            <h2>Ajuda</h2>
             <p>Grave suas próprias melodias com o botão "Gravar".<br>
             Ou toque uma música pronta usando o seletor!</p>
         </div>
     </div>
 
-    <!-- SOBRE O SITE -->
     <div class="modal" id="modalSobreSite">
         <div class="modal-content">
             <span class="close">×</span>
             <h2>Sobre o Site</h2>
-            <p><strong>Piano Virtual 5 Oitavas</strong> é um simulador de piano totalmente offline, desenvolvido com tecnologias web modernas.</p>
-            <ul>
-                <li>36 teclas brancas (C1 a C6)</li>
-                <li>Teclas pretas com mapeamento visual</li>
-                <li>Gravação e reprodução de melodias</li>
-                <li>Músicas pré-carregadas</li>
-                <li>Efeitos visuais e sonoros realistas</li>
+            <p><strong>Piano Virtual 5 Oitavas</strong> é um simulador completo, bonito e 100% offline.</p>
+            <p>Funciona em qualquer navegador, até sem internet. Desenvolvido em 2025 com tecnologias web modernas.</p>
+            <ul style="text-align:left; line-height:1.8">
+                <li>36 teclas brancas + todas as pretas (C1 a C6)</li>
+                <li>Som real de piano profissional</li>
+                <li>Gravação, reprodução e músicas prontas</li>
+                <li>Controle de volume, cor, opacidade e modo RGB</li>
+                <li>Totalmente responsivo (celular e PC)</li>
             </ul>
-            <p>Desenvolvido em 2025 com amor por uma equipe apaixonada por música e tecnologia.</p>
+            <p>Feito com carinho por apaixonados por música e programação.</p>
         </div>
     </div>
 
-    <!-- SOBRE OS DESENVOLVEDORES -->
     <div class="modal" id="modalSobreDev">
         <div class="modal-content dev-modal">
             <span class="close">×</span>
@@ -165,19 +196,19 @@
                     <img src="dev1.jpg" alt="Ana Silva">
                     <h3>Ana Silva</h3>
                     <p>Frontend & Design</p>
-                    <p><i class="fab fa-github"></i> @anasilva</p>
+                    <p>@anasilva</p>
                 </div>
                 <div class="dev-card">
                     <img src="dev2.jpg" alt="Lucas Mendes">
                     <h3>Lucas Mendes</h3>
                     <p>Web Audio & JS</p>
-                    <p><i class="fab fa-linkedin"></i> lucasmendes</p>
+                    <p>lucasmendes</p>
                 </div>
                 <div class="dev-card">
                     <img src="dev3.jpg" alt="Beatriz Costa">
                     <h3>Beatriz Costa</h3>
                     <p>UX & Músicas</p>
-                    <p><i class="fab fa-instagram"></i> @beacosta</p>
+                    <p>@beacosta</p>
                 </div>
             </div>
         </div>
@@ -186,10 +217,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
