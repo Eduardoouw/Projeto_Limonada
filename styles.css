@@ -352,22 +352,46 @@ button:disabled { background-color: #555 !important; cursor: not-allowed; opacit
 .dev-card p { margin: 3px 0; font-size: 0.9em; }
 
 /* --- RESPONSIVIDADE --- */
-@media (max-width: 768px) {
-    .piano-container { width: 100%; padding: 10px; }
-    .piano { width: 100% !important; transform: scale(0.85); transform-origin: top left; }
-    .key.white-key { width: 28px !important; height: 140px !important; }
-    .key.black-key { width: 18px !important; height: 90px !important; }
-    .note-display { font-size: 1.2em; }
-    .controls-container { flex-wrap: wrap; justify-content: center; }
-    .music-selector { flex-direction: column; align-items: stretch; }
-    #musicSelect { min-width: auto; }
-}
 
-@media (max-width: 669px) {
-    .piano { transform: scale(0.7); }
-    .key.white-key { width: 24px !important; }
-    .key.black-key { width: 16px !important; }
-    .note-display { font-size: 1em; }
-    .sequence-reader { height: 60px; }
-    .sequence-item { font-size: 1em; padding: 6px 8px; }
+@media (max-width: 768px) {
+
+    /* FAÇA O PIANO ROLAR */
+    .piano-container {
+        width: 95%; /* Ocupa 95% da tela, deixando uma margem */
+        padding: 10px;
+
+        /* A MÁGICA ACONTECE AQUI */
+        overflow-x: auto; /* Permite rolagem horizontal */
+        -webkit-overflow-scrolling: touch; /* Melhora a sensação de rolagem em dispositivos iOS */
+    }
+
+    .piano {
+        /* REMOVA as regras 'transform: scale()' e 'width: 100% !important' */
+
+        /* DEIXE a largura original que o JS usa para calcular as posições */
+        width: 1296px; 
+    }
+
+    /* * REMOVA todas as regras de .key.white-key e .key.black-key 
+     * dentro das suas media queries. Elas não são necessárias 
+     * com esta abordagem de rolagem.
+     */
+
+
+    /* MANTENHA estas outras regras responsivas que você já tem: */
+    .note-display { 
+        font-size: 1.2em; 
+        margin-top: 60px; /* Adiciona espaço para o menu hambúrguer */
+    }
+    .controls-container { 
+        flex-wrap: wrap; 
+        justify-content: center; 
+    }
+    .music-selector { 
+        flex-direction: column; 
+        align-items: stretch; 
+    }
+    #musicSelect { 
+        min-width: auto; 
+    }
 }
