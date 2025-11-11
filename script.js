@@ -141,7 +141,7 @@ function playNote(note) {
         const boost = (1.0 - playbackRate) * boostMultiplier;
         startVolume = baseVolume * (1.0 + boost);
     }
-    if (startVolume > 1.2) startVolume = 1.2;
+    if (startVolume > 0.5) startVolume = 1.2;
 
     if (isRecording) {
         const timeOffset = performance.now() - recordingStartTime;
@@ -687,6 +687,7 @@ function loadBaseSound() {
     document.addEventListener('click', () => {
         sequencePointer.classList.remove('open');
     });
+
 
 
 
