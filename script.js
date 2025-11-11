@@ -1,3 +1,16 @@
+// === DADOS DE LOGIN (SIMULADO) ===
+const USERS = [
+    { email: "ana@piano.com", password: "1234", name: "Ana Silva" },
+    { email: "lucas@piano.com", password: "dev2025", name: "Lucas Mendes" },
+    { email: "bea@piano.com", password: "musica123", name: "Beatriz Costa" }
+];
+
+// === MÚSICAS PRÉ-CARREGADAS ===
+const MUSICAS = [
+    { nome: "Música 1 - Original", seq: "[IP] - O [QY] - [QEI] -- [IP] - O [QY] - T [IP] - O [QY] - [EI] -- [IP] - O [QY] I T E [IP] - T [QY] - [EI] - [TO] [IP] - O [QYP] E [TS] [IP] - [OS] [QD] - [EOS] P O [IP] - O [QYP] - I [T] -- [QY] - [EI] -- [TO] - P [QI] TO" },
+    { nome: "Música 2 - f D f D...", seq: "f - D - f - D - f - a - d - s - [6ep] - 0 - e - t - u - p - [3a] - 0 - W - u - O - a - [6s] - 0 - e - u - f - D - f - D - f - a - d - s - [6ep] - 0 - e - t - u - p - [3a] - 0 - W - u - s - a - [6p] - 0 - e - a - s - d - [8f] - w - t - o - g - f - [5d] - w - r - i - f - d - [6s] - 0 - e - u - d - s - [3a] - 0 - u - u - f - u - f - f - x - D - f - D - f - D - f - D - f - D - f - D - f - D - f - a - d - s - [6p] - 0 - e - t - u - p - [3a] - 0 - W - u - O - a - [6s] - 0 - e - u - f - D - f - D - f - a - d - s - [6p] - 0 - e - t - u - p - [3a] - 0 - W - u - s - a - [6p] - 0 - e - a - s - d - [8f] - w - t - o - g - f - [5d] - w - r - i - f - d - [6s] - 0 - e - u - d - s - [3a] - 0 - u - s - a - [pe6]" },
+    { nome: "Música 3 - pe6...", seq: "f D f D f a d s [6ep] 0 e t u p [3a] 0 W u O a [6s] 0 e u f D f D f a d s [6ep] 0 e t u p [3a] 0 W u s a [6p] 0 e a s d [8f] w t o g f [5d] w r i f d [6s] 0 e u d s [3a] 0 u s a [pe6]" }
+];
 /* =========================================================
    SIMULADOR DE PIANO – COMPLETO
    • 36 teclas (C1 a C6)
@@ -238,3 +251,4 @@ window.addEventListener('click', e => {
 /* ---------- INICIALIZAÇÃO ---------- */
 renderPiano();
 updateDisplay('C1');
+
