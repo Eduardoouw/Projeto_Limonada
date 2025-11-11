@@ -184,7 +184,8 @@ function renderPiano() {
         }
     }
 
-  document.querySelectorAll('.key').forEach(key => {
+ // ... dentro de renderPiano() ...
+document.querySelectorAll('.key').forEach(key => {
     const note = key.dataset.note;
     key.addEventListener('mousedown', () => {
         key.classList.add('active');
@@ -607,6 +608,7 @@ function loadBaseSound() {
             alert("Erro crítico: não foi possível carregar o som do piano.");
         });
 }
+
 
 
 
