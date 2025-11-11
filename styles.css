@@ -493,3 +493,191 @@ button:disabled { background-color: #555 !important; cursor: not-allowed; opacit
     cursor: grabbing;
 }
 
+
+
+
+
+/* === RESET E BASE === */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #1e1e1e, #333);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    overflow: hidden;
+    background-image: url(Partitura.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background 0.5s;
+}
+
+/* MODO RGB DISCRETO E LINDO */
+body.rgb-mode {
+    background: linear-gradient(45deg, #120028, #1a0033, #000000, #1a0033, #120028) !important;
+    background-size: 400% 400% !important;
+    animation: rgbSubtle 12s ease infinite;
+}
+
+@keyframes rgbSubtle {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body.rgb-mode::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(45deg, #ff00aa22, #00ffff22, #ffff0022, #00ff0022);
+    pointer-events: none;
+    z-index: -1;
+    animation: rgbGlow 8s ease infinite;
+}
+
+@keyframes rgbGlow {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.note-display {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 5px 15px;
+    border-radius: 8px;
+}
+
+#current-note { color: #00ccff; margin-right: 10px; }
+#current-frequency { color: #fff; }
+
+/* PIANO */
+.piano-container {
+    width: 1350px;
+    padding: 20px;
+    background: #111;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    overflow: visible;
+    position: relative;
+}
+
+.piano {
+    position: relative;
+    width: 1296px;
+    height: 180px;
+    overflow: visible;
+}
+
+.key.white-key {
+    position: absolute;
+    width: 36px;
+    height: 180px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f7f7f7 50%, #e0e0e0 100%);
+    border: 1px solid #777;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.5), inset 0 -5px 10px rgba(0,0,0,0.1), inset 0 1px 0 #fff;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.05s ease-out;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 0.8em;
+    z-index: 1;
+}
+
+.key.white-key:active,
+.key.white-key.active {
+    background: linear-gradient(to bottom, #e0e0e0, #cccccc);
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5), inset 0 -2px 5px rgba(0,0,0,0.2);
+}
+
+.key.black-key {
+    position: absolute;
+    width: 24px;
+    height: 110px;
+    background: linear-gradient(to bottom, #222222 0%, #111111 100%);
+    border: 1px solid #000;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.7), inset 0 -5px 10px rgba(255,255,255,0.1), inset 0 1px 0 #444;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.05s ease-out;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 10px;
+    font-weight: bold;
+    color: #aaa;
+    font-size: 0.8em;
+}
+
+.key.black-key:active,
+.key.black-key.active {
+    background: linear-gradient(to bottom, #111, #000);
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.7), inset 0 -2px 5px rgba(255,255,255,0.15);
+}
+
+/* MENU HAMBÚRGUER */
+.menu-button {
+    position: fixed;
+    top: 20px; left: 20px;
+    width: 40px; height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 200;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.menu-button:hover { background-color: rgba(0, 0, 0, 0.7); }
+
+.menu-button span {
+    display: block;
+    width: 80%;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.menu-button.open span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+.menu-button.open span:nth-child(2) { opacity: 0; }
+.menu-button.open span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+/* SIDEBAR e MODAIS (mantidos iguais ao seu original) */
+.sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 100; opacity: 0; visibility: hidden; transition: opacity 0.3s; }
+.sidebar-overlay.open { opacity: 1; visibility: visible; }
+.sidebar { position: fixed; top: 0; left: 0; width: 280px; height: 100%; background-color: #2c3e50; color: white; z-index: 150; transform: translateX(-100%); transition: transform 0.3s ease-out; box-shadow: 2px 0 10px rgba(0,0,0,0.5); }
+.sidebar.open { transform: translateX(0); }
+/* ... resto do seu CSS original mantido ... */
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .piano-container { width: 95%; overflow-x: auto; padding: 10px; -webkit-overflow-scrolling: touch; }
+    .piano { width: 1296px; }
+    .note-display { margin-top: 60px; }
+}
