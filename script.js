@@ -571,3 +571,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('playButton').addEventListener('click', playRecording);
     document.getElementById('downloadButton').addEventListener('click', downloadRecording);
 });
+function loadBaseSound() {
+    if (!context) return Promise.reject("AudioContext não inicializado");
+    baseNoteFrequency = getFrequency(BASE_NOTE);
+
+    const localPath = 'sons/69.ogg';
+    const onlinePath = 'https://cdn.jsdelivr.net/gh/gleitz/midi-js-soundfonts@master/FluidR3_GM/piano-ogg/C4.ogg';
+
+    return fetch(localPath)
+        .then(response => {
+            if (response.ok) return response.arrayBuffer();
+            console.warn("Arquivo local não encontrado. Usando som online...");
+            return fetch(onlinePath).then(r => r.arrayBuffer());
+        })
+        .then(arrayBuffer => context.decodeAudioData(arrayBuffer))
+        .then(audioBuffer => {
+            baseNoteBuffer = audioBuffer;
+            console.log("Som base carregado com sucesso!");
+            renderPiano(); // ← FORÇA O PIANO A APARECER
+            return audioBuffer;
+        })
+        .catch(error => {
+            console.error("Falha total ao carregar som:", error);
+            alert("Erro crítico: não foi possível carregar o som do piano.");
+        });
+}
