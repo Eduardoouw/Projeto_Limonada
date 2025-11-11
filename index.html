@@ -9,6 +9,7 @@
 </head>
 <body>
 
+    <!-- LOGIN MODAL -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
             <span class="close">×</span>
@@ -22,6 +23,7 @@
         </div>
     </div>
 
+    <!-- USER INFO -->
     <div class="user-info" id="userInfo" style="display: none;">
         <span id="userEmailDisplay"></span>
         <button id="logoutBtn">Sair</button>
@@ -40,33 +42,36 @@
         <button id="clearSequence">Limpar</button>
     </div>
 
-    <div class="sequence-reader" id="sequenceReader">
+   <div class="sequence-reader" id="sequenceReader">
         <div class="sequence-track" id="sequenceTrack"></div>
-        <div class="sequence-pointer" id="sequencePointer"></div>
-    </div>
-
-    <div class="controls-container">
-        <div class="speed-control-standalone" id="speedControl" style="display: none;">
-            <span id="speedValueDisplay">1.0x</span>
-            <div class="speed-slider-track-standalone" id="speedSliderTrackStandalone">
-                <div class="speed-slider-thumb" id="speedSliderThumb"></div>
+        
+        <div class="sequence-pointer" id="sequencePointer">
+                <span id="speedValueDisplay">1.0x</span>
+                <div class="speed-slider-track">
+                    <div class="speed-slider-thumb" id="speedSliderThumb"></div>
+                </div>
             </div>
         </div>
 
+    </div>
+
+    <div class="controls-container">
         <button id="recordButton">Record Gravar</button>
         <button id="downloadButton" disabled>Download Baixar</button>
         <button id="playButton" disabled>Play Tocar</button>
-        <button id="playMusicButton">Music Tocar Música</button>
+        <button id="playMusicButton">Music Tocar Música</button> 
     </div>
 
     <div class="piano-container">
         <div class="piano" id="piano"></div>
     </div>
 
+    <!-- MENU HAMBÚRGUER -->
     <div class="menu-button" id="menuButton">
         <span></span><span></span><span></span>
     </div>
 
+    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>Menu</h3>
@@ -93,6 +98,7 @@
     </div>
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+    <!-- MODAIS -->
     <div class="modal" id="modal1">
         <div class="modal-content">
             <span class="close">×</span>
@@ -132,6 +138,7 @@
         </div>
     </div>
 
+    <!-- SOBRE O SITE -->
     <div class="modal" id="modalSobreSite">
         <div class="modal-content">
             <span class="close">×</span>
@@ -148,6 +155,7 @@
         </div>
     </div>
 
+    <!-- SOBRE OS DESENVOLVEDORES -->
     <div class="modal" id="modalSobreDev">
         <div class="modal-content dev-modal">
             <span class="close">×</span>
@@ -174,5 +182,14 @@
             </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
