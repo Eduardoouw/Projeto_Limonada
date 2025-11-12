@@ -14,3 +14,4 @@ LISTA COMPLETA:
 7 - NAO DEVE TER BOTAO DE GRAVAR MUSICA :)
 8 - Nas opções ao lado vai ficar dividido como "Configurações" "Sobre" "Contato" "Ajuda"
 --EZEQUIEL--: Tá fui tentar juntar os projetos e acabei estragando ele, vou ter que recomeçar
+--EZEQUIEL--: Tô apanhando pacas pra concatenar os projetos, mas sinto que estou chegando em algum lugar
