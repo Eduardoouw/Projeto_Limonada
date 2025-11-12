@@ -1,6 +1,5 @@
 Digite uma Mensagem:
 LISTA: Ezequiel { arrumar o display que aparece quando as teclas são pressionadas,
 informações sobre os devs (incluindo fotos),
-remover o "baixar musica",
 tela de usuário personalisavel e sua foto,
 cuidar para quando o usuario escrever algo não acione as teclas do piano }
