@@ -13,3 +13,4 @@ LISTA COMPLETA:
 6 - Na parte de selecionar musicas um design mais atrativo e bonito tanto para o texto musicas para indicar as musicas existentes e Um BOTÃO DE PAUSE para PAUSAR a musica automatica
 7 - NAO DEVE TER BOTAO DE GRAVAR MUSICA :)
 8 - Nas opções ao lado vai ficar dividido como "Configurações" "Sobre" "Contato" "Ajuda"
+--EZEQUIEL--: Tá fui tentar juntar os projetos e acabei estragando ele, vou ter que recomeçar
