@@ -3,3 +3,13 @@ LISTA: Ezequiel { arrumar o display que aparece quando as teclas são pressionad
 informações sobre os devs (incluindo fotos),
 tela de usuário personalisavel e sua foto,
 cuidar para quando o usuario escrever algo não acione as teclas do piano }
+
+LISTA COMPLETA: 
+1 - Display de sons animado com teclas caindo luzes e fumaça
+2 - Aumentar as informações sobre o site juntar com as informações das teclas que tem ao lado
+3 - Configuração de mudança de imagens de fundo
+4 - Garantir que ao escrever qualquer texto no site não afete o piano a ser acionado
+5 - Nas configurações um botao de poder mudar de plano de design com as cores, "Rosa" "Azul" "Roxo" "Preto" e "Amarelo" vai mudar as cores dos hovers, textos ou animações coloridas
+6 - Na parte de selecionar musicas um design mais atrativo e bonito tanto para o texto musicas para indicar as musicas existentes e Um BOTÃO DE PAUSE para PAUSAR a musica automatica
+7 - NAO DEVE TER BOTAO DE GRAVAR MUSICA :)
+8 - Nas opções ao lado vai ficar dividido como "Configurações" "Sobre" "Contato" "Ajuda"
