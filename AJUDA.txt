@@ -1,12 +1,6 @@
 Digite uma Mensagem:
---EDUARDO--: Oi vc tá ai? Que horas são alias?
---EZEQUEL--: Começandoo a trabalhar (18:05)
---EZEQUEL--: Por favor, me liste coisas para fazer no projeto
---EDUARDO--: consegui parar para programar so agora, 20:42 horas
-LISTA: sobre o site (informações)/
-Sobre os desenvolvedores precisa de foto de cada um!/
-lista de musicas automaticas/ na barra ao lado quando cliquar na bolinha,
-ter numero email ou outras informações sobre nos,instagram,facebook entre outros/
-responsividade de 768px ou 669px, ok?/
-FAZER O PROJETO FICAR USAVEL NO CELULAR
---EZEQUEL--: Valeu
+LISTA: Ezequiel { arrumar o display que aparece quando as teclas são pressionadas,
+informações sobre os devs (incluindo fotos),
+remover o "baixar musica",
+tela de usuário personalisavel e sua foto,
+cuidar para quando o usuario escrever algo não acione as teclas do piano }
