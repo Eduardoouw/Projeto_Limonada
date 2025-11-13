@@ -19,112 +19,182 @@
                 <input type="password" placeholder="Senha" id="loginPassword" required>
                 <button type="submit">Entrar</button>
             </form>
-            <p id="loginError" style="color: #e74c3c; margin-top: 10px; display: none;">Email ou senha incorretos!</p>
+            Sem conta? <a href="cadastro.html">Crie uma conta!</a>
+            <p id="loginError" style="color: var(--main-color); margin-top: 10px; display: none;">Email ou senha incorretos!</p>
         </div>
     </div>
 
     <!-- USER INFO -->
-   <div class="user-info" id="userInfo" style="display: none;">
+    <div class="user-info" id="userInfo" style="display: none;">
         <span id="userEmailDisplay"></span>
         <button id="logoutBtn">Sair</button>
     </div>
-
+<!-- notas a serem dispostas -->
     <div class="note-display">
-        <span id="current-note">C1</span>
-        <span id="current-frequency">32.70 Hz</span>
+        <span id="current-note">C4</span>
+        <span id="current-frequency">261.63 Hz</span>
     </div>
 
     <div class="music-selector">
-        <label for="musicSelect">Música:</label>
+        <label for="musicSelect" style="background: brown;padding: 6px;border-radius: 8px;">Música:</label>
         <select id="musicSelect">
             <option value="">Selecione uma música...</option>
         </select>
-        <button id="clearSequence">Limpar</button>
+        <button id="clearSequence">Limpar Seleção</button>
     </div>
 
     <div class="sequence-reader" id="sequenceReader">
-        <div class="sequence-track" id="sequenceTrack"></div>
-        <div class="sequence-pointer" id="sequencePointer">
-            <span id="speedValueDisplay">1.0x</span>
-            <div class="speed-slider-track">
-                <div class="speed-slider-thumb" id="speedSliderThumb"></div>
-            </div>
+    <div class="sequence-track" id="sequenceTrack">
         </div>
-    </div>
+</div>
 
     <div class="controls-container">
-        <button id="playMusicButton">Tocar Música</button> 
+        <button id="playMusicButton">Music Tocar Música</button> 
     </div>
 
-    <div class="piano-container">
-        <div class="piano" id="piano"></div>
+     <div class="piano-container">
+        <div class="piano" id="piano">
+            </div>
     </div>
 
     <!-- MENU HAMBÚRGUER -->
     <div class="menu-button" id="menuButton">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 
     <!-- SIDEBAR -->
+   <div class="sidebar-overlay" id="sidebarOverlay"></div>
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <h3>Menu</h3>
-            <button class="close-sidebar" id="closeSidebar">×</button>
+            <h3>Menu Principal</h3>
+            <button class="close-sidebar" id="closeSidebar"><i class="fas fa-times"></i></button>
         </div>
-        <ul class="sidebar-menu">
-            <li><button data-modal="modal1">Teclas</button></li>
-            <li><button data-modal="modal2">Qualidade de Som</button></li>
-            <li><button data-modal="modal3">Configurações</button></li>
-            <li><button data-modal="modalSobreSite">Sobre o Site</button></li>
-            <li><button data-modal="modalSobreDev">Sobre os Devs</button></li>
-            <li><button data-modal="modal5">Ajuda</button></li>
-        </ul>
+        <div class="sidebar-menu">
+            <button data-modal="modalMusicas"><i class="fas fa-music"></i> Repertório</button>
+            <button data-modal="modalConfig"><i class="fas fa-cogs"></i> Configurações</button>
+            <button data-modal="modalSobre"><i class="fas fa-info-circle"></i> Sobre o Site</button>
+            <button data-modal="modalAjuda"><i class="fas fa-keyboard"></i> Teclas / Ajuda</button>
+            <button data-modal="modalContato"><i class="fas fa-phone"></i> Contato</button>
+            <button data-modal="modalSobreDev"><i class="fas fa-code"></i> Desenvolvedores</button>
+            <button data-modal="loginModal"><i class="fas fa-user-circle"></i> Login/Logout</button>
+        </div>
         <div class="sidebar-social">
-            <p><strong>Contato:</strong></p>
-            <p><i class="fas fa-envelope"></i> contato@pianovirtual.com</p>
-            <p><i class="fas fa-phone"></i> (11) 99999-9999</p>
+            <p>Conecte-se:</p>
             <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </div>
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- MODAIS NORMAIS -->
-    <div class="modal" id="modal1">
-        <div class="modal-content">
+     <div class="modal" id="modalMusicas">
+        <div class="modal-content music-modal">
             <span class="close">×</span>
-            <h2>Teclas do Teclado</h2>
-            <div style="text-align:left; line-height:2;">
-                <strong>Brancas:</strong> a s d f g h j → C4-B4 | z x c v b n m → C3-B3 | q w e r t y u → C5-B5<br><br>
-                <strong>Pretas:</strong> Shift + tecla (ex: ! = C#4)
+            <h2><i class="fas fa-compact-disc"></i> Repertório Automático</h2>
+            <p class="music-info-text">Selecione uma música e use os botões abaixo para controlar a reprodução.</p>
+            
+            <div id="music-list-container">
+                </div>
+
+            <div class="music-controls-area">
+                <button id="playMusicButton"><i class="fas fa-play"></i> Tocar Música</button>
+                <button id="pauseMusicButton"><i class="fas fa-pause"></i> Pausar Música</button>
+                <button id="stopMusicButton"><i class="fas fa-stop"></i> Parar</button>
             </div>
         </div>
     </div>
 
-    <div class="modal" id="modal2">
-        <div class="modal-content">
+    <div class="modal" id="modalConfig">
+        <div class="modal-content config-modal">
             <span class="close">×</span>
-            <h2>Qualidade de Som</h2>
-            <p>Som real de piano acústico profissional<br>Boost automático nas graves (+50%)<br>Fade-out suave de 1.5s</p>
+            <h2><i class="fas fa-cogs"></i> Configurações do Sistema</h2>
+
+            <div class="config-section">
+                <h3>Tema de Cores</h3>
+                <p>Muda as cores de todo o design do site (texto, bordas, brilhos, animações).</p>
+                <div class="color-options" id="theme-selector">
+                    <button class="color-option theme-cyan" data-theme="cyan" title="Ciano/Padrão"></button>
+                    <button class="color-option theme-magenta" data-theme="magenta" title="Magenta/Roxo"></button>
+                    <button class="color-option theme-green" data-theme="green" title="Verde Neon"></button>
+                    <button class="color-option theme-gold" data-theme="gold" title="Dourado/Amarelo"></button>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h3>Plano de Fundo</h3>
+                <p>Selecione uma imagem de fundo (os arquivos devem estar na mesma pasta).</p>
+                <select id="background-selector">
+                    <option value="Partitura.jpg">Partitura (Padrão)</option>
+                    <option value="P.jpg">Abstrato (P.jpg)</option>
+                    <option value="none">Cor Sólida (Sem Imagem)</option>
+                </select>
+            </div>
+
+            <div class="config-section">
+                <h3>Velocidade da Música Automática</h3>
+                <p>Ajuste o delay (em milissegundos) entre as notas. (Menor valor = Mais Rápido)</p>
+                <input type="range" id="speed-range" min="100" max="600" value="300" step="50">
+                <p>Velocidade Atual: <span id="current-speed">300ms</span></p>
+            </div>
         </div>
     </div>
 
-    <div class="modal" id="modal3">
-        <div class="modal-content">
+    <div class="modal" id="modalSobre">
+        <div class="modal-content info-modal">
             <span class="close">×</span>
-            <h2>Configurações</h2>
-            <p>Em desenvolvimento...</p>
+            <h2><i class="fas fa-info-circle"></i> Sobre o Piano Virtual</h2>
+            <div class="info-content">
+                <p>Este piano virtual é um projeto Web Audio API e JavaScript feito para apresentações. Ele oferece uma experiência de piano de 36 teclas, com foco em personalização e funcionalidade automática.</p>
+                
+                <h3>Funcionalidades Essenciais</h3>
+                <ul>
+                    <li><strong>Piano Interativo:</strong> Toca notas usando o mouse ou o teclado físico (veja "Teclas / Ajuda").</li>
+                    <li><strong>Repertório Automático:</strong> Reproduz músicas pré-carregadas com opções de Tocar, Pausar e Parar.</li>
+                    <li><strong>Configurações de Design:</strong> Permite trocar o tema de cores (bordas, textos, brilhos) e a imagem de fundo.</li>
+                    <li><strong>Velocidade Musical:</strong> Controle de velocidade da reprodução automática.</li>
+                    <li><strong>Visualizador:</strong> Exibe a nota e frequência da tecla pressionada em tempo real.</li>
+                </ul>
+
+                <h3>Como o Site Funciona (O Baita Texto)</h3>
+                <p>O site utiliza o **Web Audio API** para síntese de áudio. Uma nota base (C4) é pré-carregada, e as outras notas são geradas ajustando-se a taxa de reprodução (`playbackRate`) do buffer de áudio com base na fórmula do temperamento igual. As cores e animações são controladas dinamicamente por **Variáveis CSS** (Custom Properties), permitindo que a troca de tema no JavaScript mude todo o design com eficiência.</p>
+
+                <p>O objetivo do projeto é demonstrar o poder da combinação de HTML/CSS/JavaScript na criação de ferramentas interativas e personalizáveis, garantindo estabilidade e visual atraente para grandes públicos.</p>
+            </div>
         </div>
     </div>
 
-    <div class="modal" id="modalSobreSite">
-        <div class="modal-content">
+    <div class="modal" id="modalAjuda">
+        <div class="modal-content info-modal">
             <span class="close">×</span>
-            <h2>Sobre o Site</h2>
-            <p>Piano Virtual completo, offline, com gravação, músicas prontas e muito mais!</p>
+            <h2><i class="fas fa-keyboard"></i> Mapeamento de Teclas</h2>
+            <div class="info-content">
+                <p>Use as teclas do seu teclado físico para tocar o piano. O mapeamento é configurado para cobrir 36 teclas, desde C3 até C6.</p>
+
+                <h3>Teclas Brancas (Exemplos)</h3>
+                <p>Linha Principal: **q w e r t y u i o p [ ]**</p>
+                <p>Segunda Linha: **a s d f g h j k l ; '**</p>
+                
+                <h3>Teclas Pretas (Exemplos)</h3>
+                <p>Use os números e Shift para as notas pretas no teclado. **2 3 5 6 7 9 0 - =**</p>
+                
+                <p class="key-note-alert">**Observação:** O mapeamento completo e preciso está definido no arquivo `script.js` e se adapta ao layout ABNT/QWERTY padrão.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="modalContato">
+        <div class="modal-content info-modal">
+            <span class="close">×</span>
+            <h2><i class="fas fa-phone"></i> Contato</h2>
+            <div class="info-content">
+                <p>Para suporte ou dúvidas sobre o projeto:</p>
+                <p><strong>Email Principal:</strong> contato@pianovirtual.com</p>
+                <p><strong>Telefone:</strong> (99) 98765-4321 (Fictício para apresentação)</p>
+                <p style="margin-top: 15px;">Em caso de emergência antes da apresentação, use a aba "Desenvolvedores" para encontrar os contatos diretos.</p>
+            </div>
         </div>
     </div>
 
@@ -132,31 +202,73 @@
         <div class="modal-content dev-modal">
             <span class="close">×</span>
             <h2>Sobre os Devs</h2>
-            <p>Feito com carinho por apaixonados por música e código</p>
-        </div>
-    </div>
-
-    <!-- MODAL AJUDA - CHAT COM NUVENS -->
-    <div class="modal" id="modal5">
-        <div class="modal-content chat-modal">
-            <span class="close">×</span>
-            
-            <div class="cloud cloud-1"></div>
-            <div class="cloud cloud-2"></div>
-            <div class="cloud cloud-3"></div>
-
-            <div class="chat-container">
-                <h1>Chat de Assistência</h1>
-                <div class="conversation-display" id="conversation-display">
-                    <div class="message bot-message">Olá! Como posso te ajudar hoje? <span style="font-size:0.8em">♫</span></div>
+            <div class="dev-grid">
+                <div class="dev-card">
+                    <img src="Eduardo.jpg" alt="Eduardo"> 
+                    <h3>Eduardo</h3> 
+                    <p>Frontend & Design</p>
+                    <p><i class="fab fa-github"></i> @seu_github</p>
                 </div>
-                <div class="choices-area" id="choices-area"></div>
-                <button class="action-button" id="restart-button">Reiniciar Conversa</button>
+                <div class="dev-card">
+                    <img src="Ezequiel.jpg" alt="Ezequiel"> 
+                    <h3>Ezequiel</h3> 
+                    <p>Web Audio & JS</p>
+                    <p><i class="fab fa-linkedin"></i> linkedin.com/in/ezequiel</p>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="modal" id="updateProfileModal">
+        <div class="modal-content registration-card">
+            <span class="close">×</span>
+            <h2>Atualizar Perfil</h2>
+            <form id="updateProfileForm">
+                
+                <div class="profile-picture-upload">
+                    <div class="profile-pic-preview" id="updateProfilePicPreview">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <input type="file" id="updateProfilePicInput" accept="image/*" style="display: none;">
+                    <button type="button" id="selectUpdateProfilePicBtn" class="upload-btn">Escolher Foto</button>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="updateName" placeholder="Novo Nome/Apelido" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="updateEmail" placeholder="Email" required > 
+                </div>
+                
+                <hr style="border: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="updateOldPassword" placeholder="Senha Atual (obrigatório)" required>
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="updateNewPassword" placeholder="Nova Senha (opcional)">
+                </div>
+
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="updateConfirmNewPassword" placeholder="Confirmar Nova Senha">
+                </div>
+                
+                <p id="updateProfileError" style="color: #e74c3c; margin-top: 10px; display: none;"></p>
+                <p id="updateProfileSuccess" style="color: #2ecc71; margin-top: 10px; display: none;"></p>
+
+                <button type="submit" id="saveProfileBtn">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+
     <script src="script.js"></script>
 </body>
 </html>
-
