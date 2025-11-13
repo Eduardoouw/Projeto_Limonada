@@ -881,7 +881,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Seu outro código do piano continua aqui embaixo normalmente...
 // (todas as funções de áudio, gravação, etc)
-
-
-
-
