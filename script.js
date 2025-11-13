@@ -146,11 +146,6 @@ function playNote(note) {
     }
     if (startVolume > 1.2) startVolume = 1.2;
 
-    if (isRecording) {
-        const timeOffset = performance.now() - recordingStartTime;
-        recording.push({ note: note, time: timeOffset });
-    }
-
     gainNode.gain.setValueAtTime(startVolume, now);
     gainNode.gain.linearRampToValueAtTime(0.0, endTime);
 
@@ -158,7 +153,6 @@ function playNote(note) {
     source.stop(endTime);
 }
 
-// === RENDERIZAÇÃO DO PIANO ===
 // === RENDERIZAÇÃO DO PIANO ===
 function renderPiano() {
     const piano = document.getElementById('piano');
@@ -225,7 +219,7 @@ document.addEventListener('keydown', e => {
             updateDisplay(note);
             createSpark(keyEl);
 
-            if (!isRecording && !isPlayingMusic) {
+            if (!isPlayingMusic) {
                 const keyLabel = noteToKey[note];
                 const isBlack = note.includes('#');
                 currentSequence.push({ notes: note, display: keyLabel, isChord: false, isBlack: isBlack });
@@ -251,89 +245,6 @@ function createSpark(keyElement) {
     spark.className = 'spark-effect';
     keyElement.appendChild(spark);
     spark.addEventListener('animationend', () => spark.remove());
-}
-
-// === GRAVAÇÃO ===
-function toggleRecording() {
-    const recordButton = document.getElementById('recordButton');
-    const playButton = document.getElementById('playButton');
-    const downloadButton = document.getElementById('downloadButton');
-
-    isRecording = !isRecording;
-    if (isRecording) {
-        recording = [];
-        currentSequence = [];
-        updateVisualSequence();
-        recordingStartTime = performance.now();
-        recordButton.textContent = 'Stop Parar';
-        recordButton.classList.add('recording');
-        playButton.disabled = true;
-        downloadButton.disabled = true;
-    } else {
-        recordButton.textContent = 'Record Gravar';
-        recordButton.classList.remove('recording');
-        if (recording.length > 0) {
-            playButton.disabled = false;
-            downloadButton.disabled = false;
-        }
-    }
-}
-
-function playRecording() {
-    if (recording.length === 0) return;
-
-    const recordButton = document.getElementById('recordButton');
-    const playButton = document.getElementById('playButton');
-    const downloadButton = document.getElementById('downloadButton');
-
-    recordButton.disabled = true;
-    playButton.disabled = true;
-    downloadButton.disabled = true;
-
-    currentSequence = recording.map(item => {
-        const note = item.note;
-        const keyLabel = noteToKey[note];
-        return { notes: note, display: keyLabel, isChord: false, isBlack: note.includes('#') };
-    });
-    updateVisualSequence();
-
-    const promises = [];
-    recording.forEach((event, index) => {
-        const promise = new Promise(resolve => {
-            setTimeout(() => {
-                playNote(event.note);
-                highlightKeyInSequence(index);
-
-                const keyEl = document.querySelector(`[data-note="${event.note}"]`);
-                if (keyEl) {
-                    keyEl.classList.add('active');
-                    setTimeout(() => keyEl.classList.remove('active'), 100);
-                }
-                resolve();
-            }, event.time);
-        });
-        promises.push(promise);
-    });
-
-    const totalDuration = recording[recording.length - 1].time;
-    setTimeout(() => {
-        recordButton.disabled = false;
-        playButton.disabled = false;
-        downloadButton.disabled = false;
-        highlightKeyInSequence(-1);
-    }, totalDuration + 1500);
-}
-
-function downloadRecording() {
-    if (recording.length === 0) return;
-    const jsonString = JSON.stringify(recording, null, 2);
-    const blob = new Blob([jsonString], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'minha-gravacao.json';
-    a.click();
-    URL.revokeObjectURL(url);
 }
 
 // === LEITOR VISUAL ===
@@ -413,11 +324,8 @@ function playSequenceFromList(seq) {
     isPlayingMusic = true;
     currentSequence = seq;
 
-    const recordButton = document.getElementById('recordButton');
-    const playButton = document.getElementById('playButton');
     const playMusicButton = document.getElementById('playMusicButton');
-    recordButton.disabled = playButton.disabled = playMusicButton.disabled = true;
-
+    
     sequenceTrack.innerHTML = '';
     currentSequence.forEach((item, i) => {
         if (item.isPause) return;
@@ -692,11 +600,6 @@ function loadBaseSound() {
     });
 
 
-
-
-
-
-
 // === SUAS FUNÇÕES ORIGINAIS (tudo que você já tinha) ===
 // (cole aqui todo o seu script.js original até o final)
 
@@ -881,3 +784,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Seu outro código do piano continua aqui embaixo normalmente...
 // (todas as funções de áudio, gravação, etc)
+
